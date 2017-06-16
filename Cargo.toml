@@ -1,0 +1,10 @@
+[package]
+name = "servinator"
+version = "0.1.0"
+authors = ["michel perez <michel.ingesoft@gmail.com>"]
+
+[dependencies]
+clap = "2.24.2"
+serde_json = "1.0"
+serde = "1.0.2"
+serde_derive = "1.0.8"
