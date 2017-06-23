@@ -9,9 +9,9 @@ extern crate tokio_core;
 #[macro_use]
 extern crate serde_derive;
 
-pub mod cli;
-pub mod runner;
-pub mod structs;
+mod cli;
+mod runner;
+mod structs;
 mod req;
 
 use cli::process_cli;
