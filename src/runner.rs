@@ -1,6 +1,7 @@
 use cli::Data;
 use serde_json;
 use std::fs::File;
+use std::fs;
 use std::path::Path;
 use std::io::prelude::*;
 use std::io;
@@ -17,7 +18,7 @@ pub struct Config {
 
 
 #[derive(Debug,Deserialize)]
-struct Record {
+pub struct Record {
     city: String,
     region: String,
     country: String,
@@ -31,7 +32,17 @@ pub fn run(data: &Data) {
     };
 }
 
-pub fn run_with_config(data: &Data, config: &Config) {}
+pub fn run_with_config(data: &Data, config: &Config) -> Result<(), io::Error> {
+    for entry in fs::read_dir(&data.dir)? {
+        let entry = entry?;
+        match read_from_file(&entry.path()) {
+            Ok(records) => process_records(&records),
+            Err(err) => (),
+        };
+    }
+
+    Ok(())
+}
 
 fn load_config(data: &Data) -> Result<Config, io::Error> {
     let config_file = match data.config {
@@ -52,8 +63,7 @@ fn load_config_from_file(file_path: &String) -> Result<Config, io::Error> {
     Ok(c)
 }
 
-fn read_from_file(file_path: &String) -> Result<Vec<Record>, csv::Error> {
-    let path = Path::new(file_path);
+fn read_from_file(path: &Path) -> Result<Vec<Record>, csv::Error> {
     let mut rdr = Reader::from_path(path)?;
     let mut records: Vec<Record> = Vec::new();
     for result in rdr.deserialize() {
@@ -62,3 +72,5 @@ fn read_from_file(file_path: &String) -> Result<Vec<Record>, csv::Error> {
     }
     Ok(records)
 }
+
+fn process_records(records: &Vec<Record>) {}
