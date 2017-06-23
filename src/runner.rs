@@ -18,8 +18,8 @@ pub fn run_with_config(data: &Data, config: &Config) -> Result<(), io::Error> {
     for entry in fs::read_dir(&data.dir)? {
         let entry = entry?;
         match read_from_file(&entry.path()) {
-            Ok(records) => do_reqs(config, &records).unwrap(),
-            Err(err) => println!("err csv {:?}", err),
+            Ok(records) => do_reqs(config, &records).unwrap_or(()),
+            Err(err) => println!("err reading from csv {:?}", err),
         };
     }
     Ok(())
