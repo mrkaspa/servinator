@@ -15,7 +15,7 @@ pub mod structs;
 mod req;
 
 use cli::process_cli;
-use structs::{Command, Task};
+use structs::Command;
 use runner::run;
 
 fn main() {
@@ -29,9 +29,3 @@ fn main() {
         }
     };
 }
-
-// fn main() {
-//     let vr = vec![Task { city: String::from("eooo") },
-//                   Task { city: String::from("eooo") }];
-//     req::do_reqs(&vr);
-// }
