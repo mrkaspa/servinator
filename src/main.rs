@@ -17,5 +17,5 @@ fn main() {
     match cmd {
         Command::Run(data) => run(&data),
     };
-    println!("HASTA LA VISTA, BABY");
+    println!("HASTA LA VISTA, BABYYY");
 }
