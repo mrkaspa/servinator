@@ -6,8 +6,8 @@ extern crate csv;
 #[macro_use]
 extern crate serde_derive;
 
-mod cli;
-mod runner;
+pub mod cli;
+pub mod runner;
 
 use cli::{process_cli, Command};
 use runner::run;

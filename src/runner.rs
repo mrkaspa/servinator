@@ -9,9 +9,10 @@ use csv;
 
 #[derive(Deserialize)]
 #[derive(Debug)]
-struct Config {
+pub struct Config {
     token: String,
     customer_id: String,
+    operators: i32,
 }
 
 
@@ -29,6 +30,8 @@ pub fn run(data: &Data) {
         Err(e) => println!("Severo error {:?}", e),
     };
 }
+
+pub fn run_with_config(data: &Data, config: &Config) {}
 
 fn load_config(data: &Data) -> Result<Config, io::Error> {
     let config_file = match data.config {
@@ -48,8 +51,6 @@ fn load_config_from_file(file_path: &String) -> Result<Config, io::Error> {
     let c: Config = serde_json::from_str(buf.as_str())?;
     Ok(c)
 }
-
-fn run_with_config(config: &Config) {}
 
 fn read_from_file(file_path: &String) -> Result<Vec<Record>, csv::Error> {
     let path = Path::new(file_path);
