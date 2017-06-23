@@ -1,3 +1,5 @@
 {
-  "token": "this is a demo token"
+  "token": "this is a demo token",
+  "customer_id": 1,
+  "operators": 1
 }

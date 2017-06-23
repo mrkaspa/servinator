@@ -1,4 +1,3 @@
-use cli::Data;
 use serde_json;
 use std::fs::File;
 use std::fs;
@@ -7,40 +6,22 @@ use std::io::prelude::*;
 use std::io;
 use csv::Reader;
 use csv;
+use structs::{Data, Config, Task};
+use req::do_reqs;
 
-#[derive(Deserialize)]
-#[derive(Debug)]
-pub struct Config {
-    token: String,
-    customer_id: String,
-    operators: i32,
-}
-
-
-#[derive(Debug,Deserialize)]
-pub struct Record {
-    city: String,
-    region: String,
-    country: String,
-    population: Option<u64>,
-}
-
-pub fn run(data: &Data) {
-    match load_config(data) {
-        Ok(config) => println!("{:?}", config),
-        Err(e) => println!("Severo error {:?}", e),
-    };
+pub fn run(data: &Data) -> Result<(), io::Error> {
+    let config = load_config(data)?;
+    run_with_config(data, &config)
 }
 
 pub fn run_with_config(data: &Data, config: &Config) -> Result<(), io::Error> {
     for entry in fs::read_dir(&data.dir)? {
         let entry = entry?;
         match read_from_file(&entry.path()) {
-            Ok(records) => process_records(&records),
-            Err(err) => (),
+            Ok(records) => do_reqs(config, &records).unwrap(),
+            Err(err) => println!("err csv {:?}", err),
         };
     }
-
     Ok(())
 }
 
@@ -63,14 +44,12 @@ fn load_config_from_file(file_path: &String) -> Result<Config, io::Error> {
     Ok(c)
 }
 
-fn read_from_file(path: &Path) -> Result<Vec<Record>, csv::Error> {
+fn read_from_file(path: &Path) -> Result<Vec<Task>, csv::Error> {
     let mut rdr = Reader::from_path(path)?;
-    let mut records: Vec<Record> = Vec::new();
+    let mut records: Vec<Task> = Vec::new();
     for result in rdr.deserialize() {
-        let record: Record = result?;
+        let record: Task = result?;
         records.push(record);
     }
     Ok(records)
 }
-
-fn process_records(records: &Vec<Record>) {}

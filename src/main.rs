@@ -11,15 +11,27 @@ extern crate serde_derive;
 
 pub mod cli;
 pub mod runner;
+pub mod structs;
 mod req;
 
-use cli::{process_cli, Command};
+use cli::process_cli;
+use structs::{Command, Task};
 use runner::run;
 
 fn main() {
     let cmd = process_cli();
     match cmd {
-        Command::Run(data) => run(&data),
+        Command::Run(data) => {
+            match run(&data) {
+                Ok(_) => println!("HASTA LA VISTA, BABYYY"),
+                Err(e) => println!("Severo error {:?}", e),
+            }
+        }
     };
-    println!("HASTA LA VISTA, BABYYY");
 }
+
+// fn main() {
+//     let vr = vec![Task { city: String::from("eooo") },
+//                   Task { city: String::from("eooo") }];
+//     req::do_reqs(&vr);
+// }

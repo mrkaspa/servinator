@@ -1,14 +1,6 @@
 use clap::{Arg, App};
 
-pub enum Command {
-    Run(Data),
-}
-
-#[derive(Debug)]
-pub struct Data {
-    pub dir: String,
-    pub config: Option<String>,
-}
+use structs::{Command, Data};
 
 pub fn process_cli() -> Command {
     let matches = App::new("My Super Program")
