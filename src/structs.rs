@@ -11,6 +11,7 @@ pub struct Data {
 #[derive(Deserialize)]
 #[derive(Debug)]
 pub struct Config {
+    pub url: String,
     pub token: String,
     pub service_type_id: i32,
     pub customer_id: i32,

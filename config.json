@@ -1,4 +1,5 @@
 {
+  "url": "http://localhost:4000/v1/service",
   "token": "this is a demo token",
   "customer_id": 1,
   "operators": 1
