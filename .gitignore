@@ -3,3 +3,6 @@ target/
 main
 real.json
 repo
+.idea
+.idea/**
+*.iml
