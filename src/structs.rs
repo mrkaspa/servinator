@@ -1,5 +1,6 @@
 pub enum Command {
     Run(Data),
+    None,
 }
 
 #[derive(Debug)]

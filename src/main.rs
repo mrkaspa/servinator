@@ -27,5 +27,6 @@ fn main() {
                 Err(e) => println!("Severo error {:?}", e),
             }
         }
+        Command::None => (),
     };
 }
