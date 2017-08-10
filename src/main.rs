@@ -15,18 +15,12 @@ mod structs;
 mod req;
 
 use cli::process_cli;
-use structs::Command;
 use runner::run;
 
 fn main() {
-    let cmd = process_cli();
-    match cmd {
-        Command::Run(data) => {
-            match run(&data) {
-                Ok(_) => println!("HASTA LA VISTA, BABYYY"),
-                Err(e) => println!("Severo error {:?}", e),
-            }
-        }
-        Command::None => (),
+    let data = process_cli();
+    match run(&data) {
+        Ok(_) => println!("HASTA LA VISTA, BABYYY"),
+        Err(e) => println!("Error :3 {:?}", e),
     };
 }

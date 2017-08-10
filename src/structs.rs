@@ -1,8 +1,3 @@
-pub enum Command {
-    Run(Data),
-    None,
-}
-
 #[derive(Debug)]
 pub struct Data {
     pub dir: String,
@@ -14,11 +9,10 @@ pub struct Data {
 pub struct Config {
     pub url: String,
     pub token: String,
+    pub organization_id: i32,
     pub service_type_id: i32,
-    pub customer_id: i32,
     pub operators: i32,
 }
-
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Task {

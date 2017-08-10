@@ -1,6 +1,6 @@
 use clap::{Arg, App};
 
-use structs::{Command, Data};
+use structs::Data;
 
 pub fn app_spec<'a, 'b>() -> App<'a, 'b> {
     App::new("My Super Program")
@@ -19,16 +19,15 @@ pub fn app_spec<'a, 'b>() -> App<'a, 'b> {
                  .takes_value(true))
 }
 
-pub fn process_cli() -> Command {
+pub fn process_cli() -> Data {
     let matches = app_spec().get_matches();
-
     let config = matches.value_of("config").map(String::from);
     let dir = matches
         .value_of("INPUT")
         .expect("Please provide the dir");
 
-    Command::Run(Data {
-                     config: config,
-                     dir: String::from(dir),
-                 })
+    Data {
+        config: config,
+        dir: String::from(dir),
+    }
 }
