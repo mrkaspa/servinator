@@ -6,3 +6,4 @@ repo
 .idea
 .idea/**
 *.iml
+.vscode
