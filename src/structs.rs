@@ -4,8 +4,7 @@ pub struct Data {
     pub config: Option<String>,
 }
 
-#[derive(Deserialize)]
-#[derive(Debug)]
+#[derive(Deserialize, Debug)]
 pub struct Config {
     pub url: String,
     pub token: String,

@@ -1,8 +1,8 @@
-use hyper::{Client, Method, Request};
 use hyper::header::{Authorization, ContentLength, ContentType};
-use tokio_core::reactor::Core;
+use hyper::{Client, Method, Request};
 use serde_json;
 use structs::{Config, Service, Task};
+use tokio_core::reactor::Core;
 
 pub fn do_reqs(config: &Config, records: &Vec<Task>) -> Result<(), String> {
     println!("conf = {:?}", config);

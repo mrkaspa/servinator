@@ -1,13 +1,13 @@
-use serde_json;
-use std::fs::File;
-use std::fs;
-use std::path::Path;
-use std::io::prelude::*;
-use std::io;
-use csv::Reader;
 use csv;
-use structs::{Data, Config, Task};
+use csv::Reader;
 use req::do_reqs;
+use serde_json;
+use std::fs;
+use std::fs::File;
+use std::io;
+use std::io::prelude::*;
+use std::path::Path;
+use structs::{Config, Data, Task};
 
 pub fn run(data: &Data) -> Result<(), io::Error> {
     let config = load_config(data)?;
